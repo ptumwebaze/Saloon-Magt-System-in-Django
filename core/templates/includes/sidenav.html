@@ -1,0 +1,62 @@
+  <aside class="main-sidebar sidebar-dark-primary elevation-4"><a class="navbar-brand pt-0" href="/">
+    <div>
+    <a class="navbar-brand pt-0" href="/">
+    <img src="/static/assets/img/hair.JPG" style="width: 180px; height: 90px" class="navbar-brand-img" alt="...">
+    </a>
+  </div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+     
+      <!-- Sidebar Menu -->
+      <nav class="mt-2" style="font-size:20px;">
+        <ul class="navbar-nav">
+          <li class="">
+          <a class=" nav-link {% if 'dashboard' in segment %} active {% endif %}" href="/dashboard/"> <i class="ni ni-tv-2 text-primary fa fa-home"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'service' in segment %} active {% endif %}" href="/service/">
+              <i class="ni ni-planet text-white fa fa-spinner"></i> Services
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'unit' in segment %} active {% endif %}" href="/employees/">
+              <i class="ni ni-planet text-blue fa fa-square"></i> Employees
+            </a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link {% if 'order' in segment %} active {% endif %}" href="/ordermgt/">
+              <i class="ni ni-single-02 text-green fa fa-pencil-alt"></i>Sell Services
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'order' in segment %} active {% endif %}" href="/debtors/">
+              <i class="ni ni-single-02 text-yellow fa fa-shopping-cart"></i>Debtors
+            </a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link {% if 'client' in segment %} active {% endif %}" href="/commissionpage/">
+              <i class="ni ni-planet text-orange fa fa-users"></i> Commission Payments
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'order' in segment %} active {% endif %}" href="/expense/">
+              <i class="ni ni-single-02 text-green fa fa-pencil-alt"></i>Record Expenses
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'order' in segment %} active {% endif %}" href="/sales/">
+              <i class="ni ni-single-02 text-green fa fa-pencil-alt"></i>Sales Report
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'permissions' in segment %} active {% endif %}" href="/logs/">
+              <i class="ni ni-bullet-list-67 text-info fa fa-file"></i> Audits
+            </a>
+          </li>
+        </ul> 
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>

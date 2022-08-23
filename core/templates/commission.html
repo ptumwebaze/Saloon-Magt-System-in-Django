@@ -1,0 +1,141 @@
+{% extends 'layouts/base.html' %}
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
+{% block content %}
+<div class="wrapper">
+  
+
+  <!-- Main Sidebar Container -->
+ 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) BREADCRUMB -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Commission</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Commission Details</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- jquery validation -->
+            <div class="card card-success">
+              <div class="card-header border-0">
+                   <div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-6"><h5 class="card-title"><b>COMMISSION PAYMENT</b></h5></div>
+                       <div class="col-md-5"></div>
+                  </div>
+              </div>
+              <!-- /.card-header -->
+  <!-- form start -->
+    <div class="card-body">
+        <div  class="row">
+            <div class="col-12">
+                <div class="card">
+                  
+      <!-- /.card-header -->
+          <div class="card-body">
+            <table id="table" class="table table-striped table-bordered" style="width:100%">
+              <thead>
+                 
+              <tr>                               
+               
+                <th style="font-size: 18px;">S/No.</th>
+                <th style="font-size: 18px;">Name</th>            
+                <th style="font-size: 18px;">Total</th>
+                <th style="font-size: 18px;">Paid</th>
+                <th style="font-size: 18px;">Balance</th>
+                <th style="font-size: 18px;">Action</th>
+              </tr>
+              </thead>
+              <tbody>                               
+                {% for employee in employees %}
+              <tr>            
+                <td style="font-size: 15px;">{{forloop.counter}}</td>
+                <td style="font-size: 15px;">{{employee.name}} </td>
+                <td style="font-size: 15px;">{{employee.commission}}</td>
+                <td style="font-size: 15px;">{{employee.paid}}</td>
+                <td style="font-size: 15px;">{{employee.balance}}</td> 
+                <td>
+                <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#pay{{employee.id}}"><i class="fa fa-check"> Pay</i></button>   
+              </td>
+              </tr>
+              <div class="modal fade" id="pay{{employee.id}}">
+                <div class="modal-dialog" style="width:400px !important;">
+                    <div class="modal-content">                        
+                        <form method="POST" action="{% url 'commissionpay' %}">
+                        <div class="modal-header">
+                          <h6 class="modal-title" style="margin-left:15%">You are paying {{employee.name}}?</h6>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Amount Paid</label>
+                                <input type="number" value="{{employee.balance}}" class="form-control" name="paid" placeholder="Enter Amount Paid.." required>
+                                <input type="hidden" value="{{employee.id}}" class="form-control" name="id">
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                          <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
+                        </div>                        
+                        </form>
+                    </div>
+                      </div>
+                      <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                  </div>
+              {% endfor %}
+            
+              </tbody>
+            </table>
+                  </div><!-- /.card-body -->
+                </div> <!-- /.card -->
+                </div>
+            </div>
+        </div>
+            </div>
+        <!-- /.card -->
+        </div>
+  <!--/.col (right) -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+
+</div>
+{% include "includes/footer.html" %}
+<!-- ./wrapper -->
+{% endblock content %}
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

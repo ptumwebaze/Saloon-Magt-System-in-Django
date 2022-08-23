@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Static assets - Used to load the Favicon -->
+{% load static %}
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <title>
+    Saloon Management System - {% block title %} Best Saloon Services {% endblock %} | Dedicated to Serve
+  </title>
+
+  <link href="../../static/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <link rel="icon" href="../../static/dist/img/AdminLTELogo.png">
+    
+  <!-- <link rel="stylesheet" href="static/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../static/plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../static/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../static/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../static/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../static/dist/css/adminlte.css">
+    
+
+  <!-- Specific CSS goes HERE -->
+  {% block stylesheets %}{% endblock stylesheets %}
+  {% include "includes/navigation.html" %}
+</head>
+
+  {% include "includes/sidenav.html" %}
+
+  <div class="">
+
+   
+
+    {% block content %} {% endblock content %}
+
+  </div>
+
+  {% include "includes/scripts.html" %}
+
+  <!-- Specific JS goes HERE --> 
+  {% block javascripts %}
+  
+  {% endblock javascripts %}
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+

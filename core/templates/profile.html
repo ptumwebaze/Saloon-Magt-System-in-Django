@@ -1,0 +1,219 @@
+{% load static %}
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <title>
+    Cleanex Services Limited - {% block title %} Best Laundry Services {% endblock %} | Dedicated to Serve
+  </title>
+
+  <link href="../static/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <link rel="icon" href="../static/dist/img/AdminLTELogo.png">
+    
+  <!-- <link rel="stylesheet" href="static/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../static/plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../static/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../static/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../static/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../static/dist/css/adminlte.min.css">
+    
+
+  <!-- Specific CSS goes HERE -->
+  {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+<body>
+
+{% block content %}
+
+ <!-- Header -->
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" 
+         style="min-height: 600px; background-image: url(/static/assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+      <!-- Mask -->
+      <span class="mask bg-gradient-default opacity-8"></span>
+      <!-- Header container -->
+      <div class="container-fluid d-flex align-items-center" style="text-align: center;">
+        <div class="row">
+          <div class="col-lg-7 col-md-10">
+            <h1 class="display-2 text-white">Hello {{ request.user.username }}</h1>
+            <p class="text-white mt-0 mb-5" style="font-size: 25px;">This is your profile page. You can update it to your most recent profile for better service access and delivery</p>
+            <div class="form-group">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid mt--7">
+
+      <div class="row">
+        <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+          <div class="card card-profile shadow">
+            <div class="row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+                <div class="card-profile-image">
+                  <a href="#">
+                    <img src="/static/assets/img/me.jpg" class="rounded-circle">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+              <div class="d-flex justify-content-between">
+                <a href="#" class="btn btn-sm btn-info mr-4">Update Photo</a>
+                <a href="#" class="btn btn-sm btn-default float-right">Share Our Site</a>
+              </div>
+            </div>
+            <div class="card-body pt-0 pt-md-4">
+              <div class="row">
+                <div class="col">
+                  <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                    <div>
+                      <span class="heading">22</span>
+                      <span class="description">Cart</span>
+                    </div>
+                    <div>
+                      <span class="heading">10</span>
+                      <span class="description">Total Orders Ever</span>
+                    </div>
+                    <div>
+                      <span class="heading">89</span>
+                      <span class="description">Pending</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <h3>
+                  {{ request.user.username }}
+                </h3>
+                <div class="h5 font-weight-300">
+                  {{ request.user.email }}
+                </div>
+                <div class="h5 mt-4">
+                  <i class="ni business_briefcase-24 mr-2"></i>A trust-worthy client, dedicated to serve my customers.
+                </div>
+                <div>
+                  <i class="ni education_hat mr-2"></i>Student at Muni University
+                </div>
+                <hr class="my-4" />
+                <p>I am doing a bachelors degree in Information Systems</p>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-8 order-xl-1">
+          <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">My account</h3>
+                </div>
+                <div class="col-4 text-right">
+                  <a href="/up_profile/"><button type="button" class="btn btn-warning"><i class="fa fa-plus"> Update Profile</i></a>
+                  </button>
+                </div>
+                
+              </div>
+            </div>
+            <!-- modal-content -->
+
+            <div class="card-body">
+              <form>
+             {% for prof in UserProfile %}
+             {% if prof.user.username == request.user.username %}
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label style="color:blue; font-size:20px;" for="input-username">Username</label>
+                        <input type="text" class="form-control form-control-alternative" placeholder="Username" 
+                               value="{{ prof.user.username }}">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label style="color:blue; font-size:20px;" for="input-email">Email address</label>
+                        <input type="email" class="form-control form-control-alternative" 
+                               value="{{ prof.user.email }}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label style="color:blue; font-size:20px;" for="input-first-name">First name</label>
+                        <input type="text" value="{{ prof.user.first_name }}" class="form-control form-control-alternative" >
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label style="color:blue; font-size:20px;" for="input-last-name">Last name</label>
+                        <input type="text" value="{{ prof.user.last_name }}" class="form-control form-control-alternative" >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+           
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label style="color:blue; font-size:20px;" >City Address</label>
+                        <input class="form-control form-control-alternative" value="{{ prof.city }}" placeholder="City Address" type="text">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label style="color:blue; font-size:20px;" >Other Address</label>
+                        <input class="form-control form-control-alternative" value="{{ prof.otheradd }}" placeholder="Home Address" type="text">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label style="color:blue; font-size:20px;" >Contact</label>
+                        <input type="tel" class="form-control form-control-alternative" value="{{ prof.contact }}" placeholder="Contact" value="New York">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label style="color:blue; font-size:20px;" for="input-country">Country</label>
+                        <input type="text" id="input-country" class="form-control form-control-alternative" value="{{ prof.country }}" placeholder="Country" value="United States">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+
+                <div class="pl-lg-4">
+                  <div style="color:blue; font-size:20px;" class="form-group">
+                    <label>About Me</label>
+                    <textarea rows="4" class="form-control form-control-alternative" value="{{ prof.about }}" placeholder="A few words about you ..."></textarea>
+                  </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% include "includes/footer.html" %}
+
+    </div>
+    
+
+{% endblock content %}
+</body>
+</html>
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

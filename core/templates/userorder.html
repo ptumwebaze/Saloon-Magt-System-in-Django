@@ -1,0 +1,227 @@
+{% extends 'layouts/base_user.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Laundry | Orders</title>
+  
+</head>
+
+<body>
+    
+    <!-- Site wrapper -->
+    
+    {% block content %}
+    <br><br>
+    <div class="wrapper">
+      {% if messages %}
+      {% for message in messages %}
+      {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+    
+      {% endfor %}
+    
+    {% endif %} 
+    
+    
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+              <!-- left column -->
+              <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-success">
+                  <div class="card-header border-0">
+                       <div class="row">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-2"><h5 class="card-title"><b>MY ORDERS</b></h5></div>
+                           <div class="col-md-5"></div>
+                      </div>
+                  </div>
+                  <!-- /.card-header -->
+      <!-- form start -->
+        <div class="card-body">
+            <div  class="row">
+                <div class="col-12">
+                    <div class="card">
+                      
+          <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-striped table-hover" cellspacing="0" width="100%">
+                      <thead>
+                          <tr>
+                            <th style="font-size: 18px;">S/No.</th>
+                            <th style="font-size: 18px;">Item</th>
+                            <th style="font-size: 18px;">Quantity</th>
+                            <th style="font-size: 18px;">Service</th>
+                            <th style="font-size: 18px;">Ordered on</th>                      
+                            <th style="font-size: 18px;">Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          {% for items in orders %}
+                          {% if items.added_by == request.user.username %}
+                           <td style="font-size: 16px;">{{forloop.counter}}</td>
+                            <td style="font-size: 16px;">{{items.items}}</td>
+                            <td style="font-size: 16px;">{{items.quantity}}</td>
+                            <td style="font-size: 16px;">{{items.service}}</td>
+                            <td style="font-size: 16px;">{{items.added_on}}</td>
+                            
+                           <td>
+                            {% if items.status == "0" %}
+                              <a href="{% url 'order_up' items.id %}"><button type="button" class="btn btn-info btn-xs">Book</button></a>
+                            {% elif items.status == "1" %}
+                              <a href="{% url 'order_bo' items.id %}"><button type="button" class="btn btn-info btn-xs">Booked</button></a>
+                            {% else %}
+                              <button type="button" class="btn btn-info btn-xs">Served</button>
+                            {% endif %}
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#view{{items.id}}"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete{{items.id}}"><i class="fa fa-trash"></i></button>
+                           </td>
+                        </tr>
+    
+                        <div class="modal fade" id="view{{items.id}}">
+                          <div class="modal-dialog" style="width:450px !important;">
+                            <div class="modal-content text-center">
+                              <div class="modal-header">
+                                <h4 class="modal-title text-success" style="margin-left:38%"><h4>Order Details</i></h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+                              </div>
+                              <div class="card card-primary">
+                                 <div class="card-body">
+                        <div class="row"  style="margin-left: 140px;">
+                          <div class="form-group">
+                              <label>Profile </label><br>
+                              <img src="{{items.profile.url}}" width=100px height=100px class="brand-image img-square elevation-3" width="40"/>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="fn">Name:</label>
+                              {{items.name}}
+                          </div>
+                          <div class="form-group">
+                            <label for="fn">Contact:</label>
+                            {{items.contact}}
+                          </div>
+                          
+                          <div class="form-group">
+                              <label for="addrs">Address: </label>
+                              {{items.address}}
+                          </div>
+                          <div class="form-group">
+                              <label for="cn">Email:</label>
+                              {{items.email}}
+                          </div>
+                          <div class="form-group">
+                            <label for="cn">Ordered By:</label>
+                            {{items.added_by}}
+                        </div>
+                        <div class="form-group">
+                          <label for="cn">Ordered On:</label>
+                          {{items.added_on}}
+                        </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="fn">Service: </label>
+                              {{items.service}}
+                          </div>
+                            <div class="form-group">
+                              <label >Item: </label>
+                              {{Items.items}}
+                          </div>
+                              <div class="form-group">
+                                  <label>Amount: </label>
+                                  {{Items.amount}}
+                              </div>
+                              
+                              
+                              <div class="form-group">
+                                <label>Quantity: </label>
+                                {{items.quantity}}
+                            </div>
+                            
+                              <div class="form-group">
+                                <label>Price</label>
+                                {{items.Price}}
+                              </div> 
+                              <div class="form-group">
+                                <label>Amount</label>
+                                {{items.amountpaid}}
+                              </div> 
+                              <div class="form-group">
+                                <label>Balance</label>
+                                {{items.balance}}
+                              </div> 
+                          </div>
+                          </div>
+                        
+                        </div>
+                        </div>
+                        
+                        <!-- /.modal-content -->
+                      </div>
+                      <!-- /.modal-dialog -->
+                    </div>
+                    </div>
+                                <div class="modal fade" id="delete{{items.id}}">
+                                  <div class="modal-dialog" style="width:400px !important;">
+                                      <form action="{% url 'order_del' items.id %}">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h6 class="modal-title" style="margin-left:15%">Are you sure you want delete?</h6>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              
+                                            </button>
+                                          </div>
+                                          <div class="modal-footer justify-content-between">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
+                                            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Yes</button>
+                                          </div>
+                                        </div>
+                                        </form>
+                                        <!-- /.modal-content -->
+                                      </div>
+                                      <!-- /.modal-dialog -->
+                                    </div>
+                            {% endif %}
+                          {% endfor %}
+                      </tbody>
+                   </table>             
+                    
+                   
+                      </div><!-- /.card-body -->
+                    </div> <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+                </div>
+            <!-- /.card -->
+            </div>
+      <!--/.col (right) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    </div>
+    
+    </div>
+    {% include "includes/footer.html" %}
+    <!-- ./wrapper -->
+    {% endblock content %}
+    
+    </body>
+
+</html>
+
+
+
+
+
+
+
+
+

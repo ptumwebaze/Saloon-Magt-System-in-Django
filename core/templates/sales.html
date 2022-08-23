@@ -1,0 +1,116 @@
+{% extends 'layouts/base.html' %}
+<!DOCTYPE html>
+<html>
+
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
+{% block content %}
+<div class="wrapper">
+{% if messages %}
+  {% for message in messages %}
+  {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+  {% endfor %}
+
+{% endif %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) BREADCRUMB -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Service Management</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Service Management</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- jquery validation -->
+            <div class="card card-success">
+              <div class="card-header">
+                   <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6" style="margin-left:40%"><h6 class="card-title"><b>SERVICES PROVIDED</b></h6></div>
+                    <div class="col-md-3"></div>
+                  </div>
+              </div>
+              </div>
+      <!-- /.card-header -->
+  <!-- form start -->
+                    </div>
+                        <!-- /.modal-dialog -->
+                      </div>
+                      <!-- /.card-header -->
+                          <div class="card-body">
+                            <table id="table" class="table table-bordered table-striped table-hover" cellspacing="0" width="100%">
+                              <thead>
+                              <tr>
+<!-- {% for child in children.object_list %}
+    <tr><td width="15%">strong>Sl.no</strong>
+        {{ forloop.counter0|add:children.start_index}} </td>
+    </tr>
+{% endfor %} -->
+                                <th style="font-size: 13px; width: 10%;">S/No.</th>                          
+                                <th style="font-size: 13px;">Service Name</th>
+                                <th style="font-size: 13px;">Staff </th>
+                                <th style="font-size: 13px;">Amout</th>
+                                <th style="font-size: 13px;">Recorded By</th>
+                                <th style="font-size: 13px;">Date</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                               
+                                {% for sale in allsales %}
+                              
+                              <tr>
+                                <td style="font-size: 13px;">{{forloop.counter}}</td>
+                                <td style="font-size: 13px;">{{sale.service}}</td>
+                                <td style="font-size: 13px;">{{sale.staff}}</td>
+                                <td style="font-size: 13px;">{{sale.service_price}}</td>
+                                <td style="font-size: 13px;">{{sale.added_by}}</td>
+                                <td style="font-size: 13px;">{{sale.added_on}}</td>
+                              </tr>
+                              {% endfor %}
+                              
+                              </tbody>
+                              
+                            </table>
+                          </div>
+                          <!-- /.card-body -->
+                            </div>
+                        
+              </form>
+            </div>
+            <!-- /.card -->
+            </div>
+          <!--/.col (left) -->
+          <!-- right column -->
+          <div class="col-md-6"></div>
+          <!--/.col (right) -->
+      </div><!-- /.container-fluid -->
+    <!--For washing-->
+    
+    </section>
+    <!-- /.content -->
+  </div>
+  {% include "includes/footer.html" %}
+  
+</div>
+<!-- ./wrapper -->
+{% endblock content %}
+
+</body>
+</html>

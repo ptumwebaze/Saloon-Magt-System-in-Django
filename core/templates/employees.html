@@ -1,0 +1,236 @@
+{% extends 'layouts/base.html' %}
+<!DOCTYPE html>
+<html>
+
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
+{% block content %}
+<div class="wrapper">
+{% if messages %}
+  {% for message in messages %}
+  {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+  {% endfor %}
+
+{% endif %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) BREADCRUMB -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Employee Management</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Employee Management</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- jquery validation -->
+            <div class="card card-success">
+              <div class="card-header">
+                   <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6" style="margin-left:40%"><h6 class="card-title"><b>OUR EMPLOYEES</b></h6></div>
+                    <div class="col-md-3"></div>
+                  </div>
+              </div>
+              </div>
+      <!-- /.card-header -->
+  <!-- form start -->
+  
+                        <h3 class="card-title">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#addService"><i class="fa fa-plus"> Add Employee</i></button>
+                            </div>
+                        </h3>
+                    </div>
+            <div class="modal fade" id="addService">
+                <div class="modal-dialog" style="width:450px !important;">
+                  <form method="POST" action="{% url 'employee_regist' %}" enctype="multipart/form-data" >
+                    {% csrf_token %}
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" style="margin-left:38%"><i class="fa fa-plus"> Add Employee</i></h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      
+                      </button>
+                    </div>
+                    <div class="card card-primary">
+                       <div class="card-body">
+                                <div class="form-group">
+                                    <label>Employee Name</label>
+                                    <input name="name" type="text" class="form-control" placeholder="Enter Service Name.." required>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">Contact</label>
+                                  <input type="text" class="form-control" name="contact" placeholder="Enter Contact.." required>
+                                </div> 
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">Email</label>
+                                  <input type="email" class="form-control" name="email" placeholder="Enter Email.." required>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">Position</label>
+                                  <input type="text" class="form-control" name="position" placeholder="Enter Position.." required>
+                                </div> 
+                              </div>
+                              
+                          </div>
+                            <div class="modal-footer justify-content-between">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                              <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
+                            </div>
+                        
+                          </div>
+                     
+                        </div>
+                          </form>
+                          <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                      </div>
+                      <!-- /.card-header -->
+                          <div class="card-body">
+                            <table id="table" class="table table-bordered table-striped table-hover" cellspacing="0" width="100%">
+                              <thead>
+                              <tr>
+<!-- {% for child in children.object_list %}
+    <tr><td width="15%">strong>Sl.no</strong>
+        {{ forloop.counter0|add:children.start_index}} </td>
+    </tr>
+{% endfor %} -->
+                                <th style="font-size: 13px; width: 10%;">S/No.</th>                          
+                                <th style="font-size: 13px;">Employee Name</th>
+                                <th style="font-size: 13px;">Contact</th>
+                                <th style="font-size: 13px;">Email</th>
+                                <th style="font-size: 13px;">Position</th>
+                                <th style="font-size: 13px;">Recorded By</th>
+                                <th style="font-size: 13px;">Date</th>
+                                <th style="font-size: 13px;">Action</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                               
+                                {% for employee in employees %}
+                              
+                              <tr>
+                                <td style="font-size: 13px;">{{forloop.counter}}</td>
+                                <td style="font-size: 13px;">{{employee.name}}</td>
+                                <td style="font-size: 13px;">{{employee.contact}}</td>
+                                <td style="font-size: 13px;">{{employee.email}}</td>
+                                <td style="font-size: 13px;">{{employee.position}}</td>
+                                <td style="font-size: 13px;">{{employee.addedby}}</td>
+                                <td style="font-size: 13px;">{{employee.addedon}}</td>
+                                  <td>
+                                    <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Upemployee{{employee.id}}"><i class="fa fa-pencil-alt"> Edit</i></button>
+                                </td>
+                              </tr>
+                              <div class="modal fade" id="Upemployee{{employee.id}}">
+                                <div class="modal-dialog" style="width:450px !important;">
+                                  
+                                  <form method="POST" action="{% url 'employee_edit' employee.id %}" enctype="multipart/form-data" >
+                                    {% csrf_token %}
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h4 class="modal-title" style="margin-left:38%"><i class="fa fa-plus"> Edit Employee</i></h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                       
+                                      </button>
+                                    </div>
+                                    <div class="card card-primary">
+                                       <div class="card-body">
+                                                <div class="form-group">
+                                                    <label for="UnitName">Employee Name <span style="color:red;">*</span></label>
+                                                    <input name="name" value="{{employee.name}}" type="text" class="form-control" required>
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="exampleInputEmail1">Contact <span style="color:red;">*</span></label>
+                                                  <input type="text" value="{{employee.contact}}" class="form-control" name="contact" required>
+                                                </div>  
+                                                <div class="form-group">
+                                                  <label for="exampleInputEmail1">Email <span style="color:red;">*</span></label>
+                                                  <input type="email" value="{{employee.email}}" class="form-control" name="email" required>
+                                                </div>  
+                                                <div class="form-group">
+                                                  <label for="exampleInputEmail1">Position <span style="color:red;">*</span></label>
+                                                  <input type="text" value="{{employee.position}}" class="form-control" name="position" required>
+                                                </div>                                            
+                                          </div>
+                                     
+                                          </div>
+                                            <div class="modal-footer justify-content-between">
+                                              <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                                              <button type="submit" href="{% url 'employee_edit' employee.id %}" value="employee_edit/" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
+                                            </div>
+                                                                                   
+                                          </div>
+                                          </form>
+                                          
+                                          <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                      </div>
+                              {% endfor %}
+                              
+                              </tbody>
+                              
+                            </table>
+                          </div>
+                          <!-- /.card-body -->
+                            </div>
+                        
+              </form>
+            </div>
+            <!-- /.card -->
+            </div>
+          <!--/.col (left) -->
+          <!-- right column -->
+          <div class="col-md-6"></div>
+          <!--/.col (right) -->
+      </div><!-- /.container-fluid -->
+    <!--For washing-->
+    
+    <div class="modal fade" id="delete{{employee.id}}">
+    <div class="modal-dialog" style="width:400px !important;">
+        <form action="">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h6 class="modal-title" style="margin-left:15%">Are you sure you want delete?</h6>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              
+              </button>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
+              <button type="submit" href="" value="" class="btn btn-primary"><i class="fa fa-check"></i> Yes</button>
+            </div>
+          </div>
+          </form>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  {% include "includes/footer.html" %}
+  
+</div>
+<!-- ./wrapper -->
+{% endblock content %}
+
+</body>
+</html>

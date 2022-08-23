@@ -1,0 +1,43 @@
+body{
+	background: url("pics/iron");
+	background-size: cover;
+	background-color: cyan;
+}
+.amader-form{
+	width: 600px;
+	background: rgba(0, 0, 0,.2);
+	margin: 100px auto;
+	padding: 20px;
+	border-radius: 5px;
+}
+.amader-form input{
+	display: block;
+	width: 100%;
+	font-size: 18px;
+	padding: 5px;
+	border: 1px solid yellow;
+	background: transparent;
+	color: #ffff;
+	border-radius: 5px;
+}
+.amader-form label{
+	color: #ffff;
+	cursor: pointer;
+	padding: 5px 0px;
+	display: block;
+	font-size: 20px;
+	font-family: tahoma;
+}
+.amader-form input[type=submit]{
+	width: 200px;
+	margin-top:10px;
+	cursor: pointer;
+}
+.amader-form p{
+	color: #fff;
+	font-size: 17px;
+	font-family: tahoma;
+}
+.amader-form p a{
+	color: yellow;
+}

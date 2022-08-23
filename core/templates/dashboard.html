@@ -1,0 +1,256 @@
+{% extends 'layouts/base.html' %}
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
+{% block content %}
+
+<div class="wrapper">
+
+
+  <!-- Main Sidebar Container -->
+ 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+        <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row">
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="info-box mb-3 bg-gray">
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-users"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Number of Employees</span>
+                <span class="info-box-number">{{employee}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="info-box mb-3 bg-gray">
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
+                    
+              <div class="info-box-content">
+                <span class="info-box-text">Number of Users</span>
+                <span class="info-box-number">{{user}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="info-box mb-3 bg-gray">
+              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Today's sales</span>
+                <span class="info-box-number">{{order}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <!-- Main row -->
+        <div class="row" style="background-color: cyan; color: orange;">
+
+            <div class="col-md-6">
+            <!-- solid sales graph -->
+            <div class="card bg-gradient-default col-lg-12">
+              <div class="card-header border-0"></div>
+                <h3 class="card-title">
+                  <i class="fas fa-flag"></i>
+                  Report by Sales and Commission
+                </h3>
+                
+              
+              <figure class="highcharts-figure">
+                <div id="containerx"></div>
+            
+            </figure>
+          </div>
+              <!-- /.card-footer -->
+            </div>
+            <div class="col-md-6">
+              <!-- solid sales graph -->
+              <div class="card bg-gradient-default col-lg-12">
+                <div class="card-header border-0"></div>
+                  <h3 class="card-title">
+                    <i class="fas fa-flag"></i>
+                    Report of Users vs Employees
+                  </h3>                
+               
+              <figure class="highcharts-figure">
+                <div id="containerk"></div>
+            
+              </figure>
+            </div>               
+               
+            <!-- /.card -->
+            </div>
+            
+          </div>
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+</div>
+{% include "includes/footer.html" %}
+<!-- jQuery -->
+<script src="../static/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="../static/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<script src="../static/plugins/raphael/raphael.min.js"></script>
+<!-- Morris -->
+<script src="../static/plugins/morris.js/morris.min.js"></script>
+<!-- ChartJS -->
+<script src="../static/plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="../static/plugins/sparklines/sparkline.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="../static/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="../static/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="../static/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../static/dist/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="../static/dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../static/dist/js/demo.js"></script>
+
+<script src="../static/highcharts/code/highcharts.js"></script>
+<script src="../static/highcharts/code/modules/exporting.js"></script>
+<script src="../static/highcharts/code/modules/export-data.js"></script>
+<script src="../static/highcharts/code/modules/accessibility.js"></script>
+<!-- page script -->
+<script type="text/javascript">
+  Highcharts.chart('containerx', {
+      chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          type: 'column'
+      },
+      title: {
+          text: 'Sales Vs Expenses'
+      },
+      tooltip: {
+          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      accessibility: {
+          point: {
+              valueSuffix: '%'
+          }
+      },
+      plotOptions: {
+          pie: {
+              allowPointSelect: true,
+              cursor: 'pointer',
+              dataLabels: {
+                  enabled: true,
+                  format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+              }
+          }
+      },
+      series: [{
+          name: 'Number',
+          colorByPoint: true,
+          data: [{
+              name: 'Total Orders',
+              y: {{order}},
+              sliced: true,
+              selected: true
+          }, {
+              name: 'Total Expenses',
+              y: {{expense}} 
+          }]
+      }]
+  });
+      </script>
+  <script type="text/javascript">
+    Highcharts.chart('containerk', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Users-Employees'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        },
+        series: [{
+            name: 'Number',
+            colorByPoint: true,
+            data: [{
+                name: 'Users',
+                y: {{user}},
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Employees',
+                y: {{employee}} 
+            }]
+        }]
+    });
+        </script>
+<!-- ./wrapper -->
+{% endblock content %}
+</body>
+</html>
